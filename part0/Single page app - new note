@@ -1,0 +1,16 @@
+note over browser:
+browser creates a note object
+and adds it to the "notes"
+array, then re-renders the notes
+to display and also sends the
+note object to the server
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa\n{content: "test", date: "2022-09-18T23:14:24.302Z"}
+
+note over server:
+server receives data, and adds
+it to the "notes" array
+end note
+
+server-->browser: HTTP STATUS CODE 201\nJSON-code: {"message":"note created"}

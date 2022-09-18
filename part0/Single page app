@@ -1,0 +1,39 @@
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server
+and registers an event handler to
+handle the form submit event
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{content: "hhhhhhh", date: "2022-09-18T15:43:38.089Z"}, ...]
+
+opt favicon
+    note over browser:
+    the browser tries autonomously
+    to fetch the favicon
+    (tested on firefox and chrome)
+    end note
+
+    browser->server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+    
+    note over server:
+    the server returns html code
+    instead of a .ico file
+    end note
+    
+    server-->browser: HTML-code
+end
+
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note

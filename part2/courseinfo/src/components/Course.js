@@ -3,7 +3,7 @@ import Header from "./Header"
 import Total from "./Total"
 
 const Course = ({ course }) => {
-  const { id, name, parts } = course
+  const { name, parts } = course
 
   return (
     <div>

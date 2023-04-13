@@ -2,10 +2,19 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
+
+  const [nameFilter, setNameFilter] = useState('');
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+
+  const handleNameFilterChange = ({ target }) => {
+    setNameFilter(target.value)
+  }
 
   const handleNameChange = ({ target }) => {
     setNewName(target.value)
@@ -25,11 +34,16 @@ const App = () => {
 
     setPersons(persons.concat({ name: newName, number: newNumber }))
     setNewName('')
+    setNewNumber('')
   }
+
+  const personsToShow = persons.filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
 
   return (
     <div>
       <h2>Phonebook</h2>
+      filter shown with<input value={nameFilter} onChange={handleNameFilterChange} />
+      <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -43,7 +57,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
 
-      {persons.map(({ name, number }) => <div key={name}>{name} {number}</div>)}
+      {personsToShow.map(({ name, number }) => <div key={name}>{name} {number}</div>)}
     </div>
   )
 }
